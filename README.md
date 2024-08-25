@@ -6,6 +6,11 @@ Año 2024
 # Quid novi
 Archivos de los lenguajes de progamación vistos en la materia y necesarios para prácticas o varios experimentos.
 
+# Pascal y C
+Hice <b> gcc -c inc.c </b> para generar archivo objeto de C
+
+Usé fpc para compilar y linkear el archivo objeto a Pascal (Free Pascal): <b> fpc CallToC.pas </b>
+
 # Perl
 Un archivo Perl contiene en su primer linea el texto:
 
