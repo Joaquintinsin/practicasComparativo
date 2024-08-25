@@ -13,10 +13,8 @@ Un archivo Perl contiene en su primer linea el texto:
 
 Dos módulos son recomendados por la documentación de Perl, lo cual son las dos siguientes líneas:
 
-<code>
-    use strict;
-    use warnings;
-</code>
+<code>use strict;</code>
+<code>use warnings;</code>
 
 En https://github.com/Joaquintinsin/practicasComparativo/blob/main/Practico2/IntroPerl/IntroduccionAPerl.pl resumí el doc dado por Perl (perldoc en consola)
 
