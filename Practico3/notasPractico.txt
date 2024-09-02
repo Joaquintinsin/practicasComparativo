@@ -1,0 +1,9 @@
+Practico Sandra Jueves 13hs
+
+En memoria inmutable hay variables y valores
+En el programa y en el ambiente hay Identificadores
+
+Los identificadores se ligan a las variables y las variables estan ligadas o no a valores
+
+Un programa puede suspenderse si hay valores indeterminados y se esta esperando que reciba un valor
+
