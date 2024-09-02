@@ -1,6 +1,7 @@
 Program CallToC;
 
-{$l inc.o}
+{$l libmylib.a}
+// {$l inc.o}
 
 Var x:integer; external name 'y';
 
