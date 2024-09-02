@@ -28,3 +28,5 @@ my_function(5);
 $y = "Te pude asignar y leer afuera!";
 print "Valor y afuera del modulo: $y \n";
 print "Valor x afuera del modulo: $x \n";
+
+# Perl tiene alcance dinamico por defecto, lo que hace my es pasarlo a estatico
