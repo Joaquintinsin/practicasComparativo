@@ -1,0 +1,142 @@
+1. Describiendo los cambios que sufren tanto la memoria inmutable como la mutable, decir que muestra cada uno de los siguientes algoritmos:
+
+(a) local X Y in
+        X=1
+        {NewCell X Y}
+        {Browse @Y}
+    end
+
+(b) local Z X C1 C2 Temp1 Temp2 in
+        X=10
+        {NewCell X C1}
+        {NewCell C1 C2}
+        {Browse @C1}
+        {Exchange C1 Temp1 C2}
+        {Exchange C2 Temp2 Temp1}
+        {Browse @C2}
+        {Browse @C1}
+
+        Z=5
+        {Exchange C1 _ Z}
+        {Browse @Temp2}
+    end
+
+(c) local X Y Z in
+        X=1
+        {NewCell X Y}
+        {NewCell 1 Z}
+        {Browse @Y==@Z}
+    end
+
+
+{NewCell Valor Celda}
+el arrobla es navegable, arroba de arroba
+en memoria mutable siempre voy a tener pares
+primera componente una celda, segunda componente puede ser una variable, por ejemplo otra celda
+
+{Exchange CeldaDestino ValorViejo CeldaOrigen}
+X = (C := Y)
+unifico ValorViejo con CeldaDestino
+memoria mutable le doy a ValorViejo lo que contenia CeldaDestino
+ahora al contenido de CeldaDestino se actualiza con el valor de CeldaOrigen
+aparece en mutable (CeldaDestino, CeldaOrigen)
+a CeldaDestino le asigno CeldaOrigen
+
+
+a)
+NewCell X Y
+    crea una nueva celda llamada Y con el valor inicial de X
+    en memoria inmutable aparece:
+        y = "cell_y"
+    en memoria mutable aparece:
+        (y, x)
+
+Browse @Y
+    muestra por pantalla el contenido de la celda Y
+    es decir, si en mutable aparece (y, x)
+    va a mostrar lo que contiene x
+
+b)
+NewCell X C1
+    inmutable:
+        c1 = "cell_c1"
+    mutable:
+        (c1, x)
+
+NewCell C1 C2
+    inmutable:
+        c2 = "cell_c2"
+    mutable
+        (c2, c1)
+
+Browse @C1
+    busca en la mutable con quien se relaciona C1 (con x)
+    si en mutable aparece (c1, c2)
+    muestra el contenido del identificador c2
+    en nuestro caso: muestra 10
+
+C2 tiene que ser una celda
+Exchange C1 Temp1 C2
+    inmutable:
+        temp1 = x
+    mutable:
+        (c1, c2)
+
+Exchange C2 Temp2 Temp1
+    inmutable:
+        temp2 = x
+    mutable:
+        (c2, temp1)
+
+Browse @C2
+    busca en la mutable con quien se relaciona C2
+        aparece (c2, temp1)
+    muestra lo que contiene temp1
+    en nuestro caso: muestra 10
+
+Browse @C1
+    busca en la mutable con quien se relacoina C1
+        aparece (c1, c2)
+    muestra c2 que es la celda
+    "cell_c2"
+
+
+c)
+X=1
+    inmutable:
+        x=1
+NewCell X Y
+    inmutable:
+        y = "cell_y"
+    mutable:
+        (y, x)
+NewCell 1 Z
+    inmutable:
+        z = "cell_z"
+    mutable:
+        (z, valorUno)   // ligamos un identificador valorUno a 1, previamente definido
+
+
+cuando se reasigna un valor a una celda, se tacha el anterior para ir mostrando los cambios
+en la memoria se borra, se reemplaza
+en papel lo tachamos para que ellos sepan lo que vamos haciendo
+para que se vayan mostrando los cambios
+
+
+(x, y)
+el contenido de la celda y, en ese momento, es x
+
+la ligadura significa que estan apuntando al mismo lugar de memoria
+tiene que ver mas con la memoria inmutable
+
+si una celda tiene otra celda:
+tal que a es valor
+y es celda, z es celda
+(y, a)
+(z, y)
+
+browse z = cell_z
+browse @z = cell_y
+browse @@z = 1
+
+

@@ -1,0 +1,70 @@
+10. GENERECIDAD y ABSTRACCIONES SINTÁCTICAS. 
+Diseñe un algoritmo (FoldR) que generalice, mediante la incorporación de parámetros, el comportamiento de las siguientes funciones.
+(a) fun {SumList L}
+        case L
+        of nil then 0
+        [] X|L1 then X+{SumList L1}
+        end
+    end
+
+fun {FoldR L F N}
+    case L
+    of  nil     then N
+    []  x|xs    then {FoldR xs F N}
+    end
+end
+
+fun {SumList L}
+    {FoldR L (fun{$X Y} X+Y end) 0}
+end
+
+    fun {ProdList L}
+        case L
+        of nil then 1
+        [] X|L1 then X*{SumList L1}
+        end
+    end
+
+fun {FoldR L F N}
+    case L
+    of  nil     then N
+    []  x|xs    then {FoldR xs F N}
+    end
+end
+
+fun {ProdList L}
+    {FoldR L (fun{$X Y} X*Y end) 1}
+end
+
+
+(b) QUE devuelve la siguiente función?
+    fun {Some L}
+        {FoldR L fun {$ X Y} X orelse Y end false}
+    end
+
+
+(c) Utilizar un esquema general de iteración para implementar un algoritmo que calcule la Raiz Cuadrada de un número real positivo, mediante el método de Newton.
+    A continuación se detalla una posible implementación del método sin utilizar abstracción.
+
+    fun {Raiz X}
+        fun {RaizIter Adiv}
+            fun {Mejorar}
+                (Adiv + X/Adiv) / 2.0
+            end
+            fun {Buena}
+                {Abs X-Adiv*Adiv}/X < 0.00001
+            end
+        in
+            if {Buena} then Adiv
+            else
+                {RaizIter {Mejorar}}
+            end
+        end
+        Adiv=1.0
+    in
+        {RaizIter Adiv}
+    end
+
+
+
+

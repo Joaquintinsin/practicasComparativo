@@ -1,0 +1,32 @@
+paso a paso en la memoria en el stack
+
+static data:
+    g: boolean
+
+en todo mi programa P tengo:
+    var g:boolean
+    function f2
+    procedure p1
+        var x:integer
+        function f1
+
+inicialente DL y SL apuntan a nil
+
+stack pointer inicialmente apunta al principio del registro de activacion
+
+invocar un procedimiento o una funcion
+    en la pila se crea un registro de activacion
+    se apila un registro de activacion
+    si o si en este orden
+        valor retorno (funcion)
+        parametros
+        dir retorno
+        static link (si tiene alcance estatico)
+        dynamic link
+        variables locales
+    el stack pointer ahora apunta al inicio de la nueva invocacion del procedimiento o funcion
+
+
+el static link es quien lo define
+el dinamic link es quien lo invocó
+

@@ -1,0 +1,21 @@
+Hacer maquina abstracta. Mostrar salida de {Browse A+Y}
+
+local X in
+    X = 1
+    local P in
+        P = proc{$Y}
+                local P A in
+                    P = proc{$Z}
+                            Z = 10
+                    end
+                    {P A}
+                    {Browse A+Y}
+                end
+        end
+        {P X}
+    end
+end
+
+([(S, O)], I)
+
+([(s1, s2, {})])

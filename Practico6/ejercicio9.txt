@@ -1,0 +1,63 @@
+local X in
+    local C in
+        X = 1
+        {NewCell X C}
+        local Uno in
+            Uno = 1
+            local ValorC in
+                {Exchange C ValorC ValorC}
+                local ResSuma in
+                    ResSuma = ValorC + 1
+                    {Exchange C ValorC ResSuma}
+                    local T3 in
+                        {Exchange C T3 T3}
+                        {Browse T3}
+                    end
+                end
+            end
+            {Browse X}
+        end
+    end
+end
+
+
+local X in                                          S1
+    local C in                                          S2
+        X = 1                                               S3
+        {NewCell X C}                                       S4
+        local Uno in                                        S5
+            Uno = 1                                             S6
+            local ValorC in                                     S7
+                {Exchange C ValorC ValorC}                          S8
+                local ResSuma in                                    S9
+                    ResSuma = ValorC + 1                                S10
+                    {Exchange C ValorC ResSuma}                         S11
+                    local T3 in                                         S12
+                        {Exchange C T3 T3}                                  S13
+                        {Browse T3}                                         S14
+                    end                                                 e
+                end                                                 e
+            end                                                 e
+            {Browse X}                                          S15
+        end                                                 e
+    end                                                 e
+end                                                 e
+
+
+
+
+([(S, A)], I, M)
+
+([(S1, A)], I, M)
+
+([(S2, {X->x})], {x}, M)
+
+([(S3, S4, S5, {X->x, C->c})], {x,c}, M)
+
+([(S4, S5, {X->x, C->c})], {x=1,c}, M)
+
+([(S5, {X->x, C->c})], {x=1,c='cell_c'}, {(c,x)})
+
+([(S6, S7, )])
+
+

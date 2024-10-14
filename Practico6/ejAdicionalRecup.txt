@@ -1,0 +1,79 @@
+local X Y Z C1 C2 Temp in
+    Y=1
+    {NewCell Y C1}
+    {NewCell C1 C2}
+    {Exchange C2 Temp Y}
+    {NewCell Y X}
+    {Exchange C1 Z C2}
+    {Browse C2}
+    {Browse @C2}
+    {Browse @X}
+    {Browse @@C1}
+end
+
+
+local X Y Z C1 C2 Temp in           S1
+    Y=1                                 S2
+    {NewCell Y C1}                      S3
+    {NewCell C1 C2}                     S4
+    {Exchange C2 Temp Y}                S5
+    {NewCell Y X}                       S6
+    {Exchange C1 Z C2}                  S7
+    {Browse C2}                         S8
+    {Browse @C2}                        S9
+    {Browse @X}                         S10
+    {Browse @@C1}                       S11
+end                                 e
+
+
+    Inicio del programa
+([(S,A)], I, M)
+
+    Cargar S1 a la lista de instrucciones
+([(S1, A)], I, M)
+
+    Ejecutar S1: carga los S a las instrucciones: ambiente para cada una e inmutable con las variables sin inicializar
+([(S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, {X->x, Y->y, Z->z, C1->c1, C2->c2, Temp->t})], {x,y,z,c1,c2,t}, M)
+
+    Ejecutar S2: en inmutable ligar y con 1
+([(S3, S4, S5, S6, S7, S8, S9, S10, S11, {X->x, Y->y, Z->z, C1->c1, C2->c2, Temp->t})], {x,y=1,z,c1,c2,t}, M)
+
+    Ejecutar S3: en mutable darle y a la celda c1, en inmutable ligar c1 con cell_c1 
+([(S4, S5, S6, S7, S8, S9, S10, S11, {X->x, Y->y, Z->z, C1->c1, C2->c2, Temp->t})], {x,y=1,z,c1='cell_c1',c2,t}, {(c1, y)})
+
+    Ejecutar S4: en mutable darle c1 a la celda c2, en inmutable ligar c2 con cell_c2
+([(S5, S6, S7, S8, S9, S10, S11, {X->x, Y->y, Z->z, C1->c1, C2->c2, Temp->t})], {x,y=1,z,c1='cell_c1',c2='cell_c2',t}, {(c1, y), (c2, c1)})
+
+    Ejecutar S5: en inmutable ligar lo que tiene c1 a z y en mutable darle el contenido de c2 a c1
+([(S6, S7, S8, S9, S10, S11, {X->x, Y->y, Z->z, C1->c1, C2->c2, Temp->t})], {x,y=1,z,c1='cell_c1',c2='cell_c2',t=c1}, {(c1, y), /(c2, c1)/, (c2, y)})
+
+    Ejecutar S6: en inmutable ligar x con cell_x y en mutable darle lo que tiene y a x
+([(S7, S8, S9, S10, S11, {X->x, Y->y, Z->z, C1->c1, C2->c2, Temp->t})], {x='cell_x',y=1,z,c1='cell_c1',c2='cell_c2',t=c1}, {(c1, y), /(c2, c1)/, (c2, y), (x, y)})
+
+    Ejecutar S7: en inmutable ligar z con el contenido de c1 y en mutable darle lo que tiene c2 a c1
+([(S8, S9, S10, S11, {X->x, Y->y, Z->z, C1->c1, C2->c2, Temp->t})], {x='cell_x',y=1,z=y,c1='cell_c1',c2='cell_c2',t=c1}, {/(c1, y)/, /(c2, c1)/, (c2, y), (x, y), (c1, c2)})
+
+    Ejecutar S8: mostrar lo de inmutable de c2
+Muestra 'cell_c2' , ([(S9, S10, S11, {X->x, Y->y, Z->z, C1->c1, C2->c2, Temp->t})], {x='cell_x',y=1,z=y,c1='cell_c1',c2='cell_c2',t=c1}, {/(c1, y)/, /(c2, c1)/, (c2, y), (x, y), (c1, c2)})
+
+    Ejecutar S9: mostrar lo que contiene la celda c2
+Muestra 1 , ([(S10, S11, {X->x, Y->y, Z->z, C1->c1, C2->c2, Temp->t})], {x='cell_x',y=1,z=y,c1='cell_c1',c2='cell_c2',t=c1}, {/(c1, y)/, /(c2, c1)/, (c2, y), (x, y), (c1, c2)})
+
+    Ejecutar S10: mostrar lo que contiene la celda x
+Muestra 1 , ([(S11, {X->x, Y->y, Z->z, C1->c1, C2->c2, Temp->t})], {x='cell_x',y=1,z=y,c1='cell_c1',c2='cell_c2',t=c1}, {/(c1, y)/, /(c2, c1)/, (c2, y), (x, y), (c1, c2)})
+
+    Ejecutar S11: mostrar lo que contiene lo que contiene la celda c1
+Muestra 1 (el contenido de c1 es la celda c2: muestra el contenido de c2: que es y) , ([], {x='cell_x',y=1,z=y,c1='cell_c1',c2='cell_c2',t=c1}, {/(c1, y)/, /(c2, c1)/, (c2, y), (x, y), (c1, c2)})
+
+Termina el programa
+
+
+
+(celda, valor) en mutable...
+
+los exchange con el tercer parametro celda, no voy a buscar lo que tiene esa celda, sino que yo en la mutable le doy LA celda, no el valor
+
+entonces
+(c1, c2)
+
+y no (c1, @c2) === (c1, y)

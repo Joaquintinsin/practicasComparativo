@@ -1,0 +1,32 @@
+tres formas de asignar un tipo a pascal
+
+1.
+    var a: Integer
+
+2.
+    Type NombreTipo = Integer
+    var hoy: NombreTipo
+
+3.
+    const pi=3.14
+
+x:Set of Char       ...     x := ['a', 'b', 'c']
+                            x := []
+y:Set of Integer    ...     y := [1, 2, 3, 4]
+                            y := []
+
+
+Type DiaSemana = (Dom,Lun,Mar,Mie,Jue,Vie,Sab);
+Var s:Set of DiaSemana;
+
+tipo absolute:
+apunta al mismo lugar de memoria que s
+aliasing
+tanto por b como por s al mismo lugar de memoria
+
+integer 2 bytes
+16 bits
+guarda 1 bit para el signo
+entonces 2^15 = 32768 posibles valores para los integer
+
+Var b:Integer absolute s

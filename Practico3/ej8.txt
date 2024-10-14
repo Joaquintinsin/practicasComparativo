@@ -1,0 +1,99 @@
+8. Mostrar que en el siguiente programa recursivo a la cola, el tamaño de la pila se mantiene limitada o acotada.
+proc {Loop5 I}
+    local C in
+        C = I == 5
+        if C then
+            skip
+        else
+            local J in
+                J = I + 5
+                {Loop5 J}
+            end
+        end
+    end
+end
+
+Nota: ejecutar al menos dos invocaciones recursivas.
+
+
+local Loop5 in                              |S
+    Loop5 = proc {I}                        |   S1
+            local C in                      |       S5
+                C = I == 5                  |           S6
+                if C then                   |           S7 if
+                    skip                    |               S11
+                else                        |           S7 else
+                    local J in              |               S8
+                        J = I + 5           |                   S9
+                        {Loop5 J}           |                   S10
+                    end                     |               </S8>
+                end                         |           </S7>
+            end                             |       </S5>
+    end                                     |   </S1>
+    local A in                              |   S2
+        A = -5                              |       S3
+        {Loop5 A}                           |       S4
+    end                                     |   </S2>
+end                                         |</S>
+
+
+([(S, Empty)], I)
+
+([(s1, s2, {Loop5 -> l})], {l})
+
+([(s1, {Loop5 -> l}), (s2, {Loop5 -> l})], {l})
+                                                                Si sabemos que es recursivo, el Loop5 del ambiente va a tener la variable de la recursividad
+([(s2, {Loop5 -> l})], {l = (proc...end, {Loop5 -> l}), a})
+
+([(s3, s4, {Loop5 -> l, A -> a})], {l = (proc...end, {Loop5 -> l}), a})
+
+([(s3, {Loop5 -> l, A -> a}), (s4, {Loop5 -> l, A -> a})], {l = (proc...end, {Loop5 -> l}), a})
+
+([(s4, {Loop5 -> l, A -> a})], {l = (proc...end, {Loop5 -> l}), a = -5})
+
+([(s5, {Loop5 -> l, I -> a})], {l = (proc...end, {Loop5 -> l}), a = -5})
+
+([(s6, s7, {Loop5 -> l, I -> a, C -> c})], {l = (proc...end, {Loop5 -> l}), a = -5, c})
+    Distribuyo
+([(s6, {Loop5 -> l, I -> a, C -> c}), (s7, {Loop5 -> l, I -> a, C -> c})], {l = (proc...end, {Loop5 -> l}), a = -5, c})
+
+([((s7, {Loop5 -> l, I -> a, C -> c})], {l = (proc...end, {Loop5 -> l}), a = -5, c = false})
+
+([((s7, {Loop5 -> l, I -> a, C -> c})], {l = (proc...end, {Loop5 -> l}), a = -5, c = false})
+
+([((s8, {Loop5 -> l, I -> a, C -> c, J -> j})], {l = (proc...end, {Loop5 -> l}), a = -5, c = false, j})
+
+([((s9, s10, {Loop5 -> l, I -> a, C -> c, J -> j})], {l = (proc...end, {Loop5 -> l}), a = -5, c = false, j})
+    Distribuyo
+([(s9, {Loop5 -> l, I -> a, C -> c, J -> j}), (s10, {Loop5 -> l, I -> a, C -> c, J -> j})], {l = (proc...end, {Loop5 -> l}), a = -5, c = false, j})
+    j ligarlo a i+5, pero escribo en memoria el valor final, entonces i tenia a, a = -5, -5 + 5 = 0. ligo a j con 0
+([(s10, {Loop5 -> l, I -> a, C -> c, J -> j})], {l = (proc...end, {Loop5 -> l}), a = -5, c = false, j = 0})
+
+([(s10, {Loop5 -> l, I -> a, C -> c, J -> j})], {l = (proc...end, {Loop5 -> l}), a = -5, c = false, j = 0})
+    Llamada adentro de Loop5 J
+([(s5, {Loop5 -> l, I -> j})], {l = (proc...end, {Loop5 -> l}), a = -5, c = false, j = 0})
+
+([(s6, s7, {Loop5 -> l, I -> j, C -> c2})], {l = (proc...end, {Loop5 -> l}), a = -5, c = false, j = 0, c2})
+    Distribuyo
+([(s6, {Loop5 -> l, I -> j, C -> c2}), (s7, {Loop5 -> l, I -> j, C -> c2})], {l = (proc...end, {Loop5 -> l}), a = -5, c = false, j = 0, c2})
+    La C que se liga tiene que tomar un booleano, busca el valor de I que tiene ligado j y j es 0, luego 0 == 5 = False
+([(s7, {Loop5 -> l, I -> j, C -> c2})], {l = (proc...end, {Loop5 -> l}), a = -5, c = false, j = 0, c2 = false})
+
+([(s8, {Loop5 -> l, I -> j, C -> c2})], {l = (proc...end, {Loop5 -> l}), a = -5, c = false, j = 0, c2 = false})
+
+([(s9, s10, {Loop5 -> l, I -> j, C -> c2, J -> j1})], {l = (proc...end, {Loop5 -> l}), a = -5, c = false, j = 0, c2 = false, j1})
+    Distribuyo
+([(s9, {Loop5 -> l, I -> j, C -> c2, J -> j1}), (s10, {Loop5 -> l, I -> j, C -> c2, J -> j1})], {l = (proc...end, {Loop5 -> l}), a = -5, c = false, j = 0, c2 = false, j1})
+    le doy a J = I + 5 entonces j = 0 + 5
+([(s10, {Loop5 -> l, I -> j, C -> c2, J -> j1})], {l = (proc...end, {Loop5 -> l}), a = -5, c = false, j = 0, c2 = false, j1 = 5})
+
+([(s5, {Loop5 -> l, I -> j1})], {l = (proc...end, {Loop5 -> l}), a = -5, c = false, j = 0, c2 = false, j1 = 5})
+
+([(s6, s7, {Loop5 -> l, I -> j1, C -> c3})], {l = (proc...end, {Loop5 -> l}), a = -5, c = false, j = 0, c2 = false, j1 = 5})
+    Distribuyo
+([(s6, {Loop5 -> l, I -> j1, C -> c3}), (s7, {Loop5 -> l, I -> j1, C -> c3})], {l = (proc...end, {Loop5 -> l}), a = -5, c = false, j = 0, c2 = false, j1 = 5, c3})
+    Pone en c3 = I == 5, luego i es j1, j1 es 5, y 5==5 = True
+([(s7, {Loop5 -> l, I -> j1, C -> c3})], {l = (proc...end, {Loop5 -> l}), a = -5, c = false, j = 0, c2 = false, j1 = 5, c3 = true})
+    Entra en el if C then skip
+skip
+

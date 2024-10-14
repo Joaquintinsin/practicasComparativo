@@ -1,0 +1,61 @@
+segmento de datos
+    se definen las variables globales
+
+memoria dividida en 4 partes
+    heap
+        basura, memoria colgada
+    stack
+        en cualquier programa que yo tenga, por cada invocacion a procedimiento o funcion se activa un registro de activacion
+        se va apilando en el tope de la pila
+    static data
+        variables globales o estaticas, viven durante toda la ejecucion del programa
+    code segment (programa)
+        flags
+        stack pointer
+            (APUNTA A) 
+                valores temporales
+                variables locales
+        frame pointer
+            (APUNTA A) 
+                dynamic link
+                static link
+                dir retorno
+                parametros
+                valor retorno (funciones)
+        program counter
+        otros...
+    
+    registro de activacion:
+        valores temporales
+            no vamos a trabajar con valores temporales
+        variables locales
+            viven mientras se invoca esa funcion/procedimiento
+        dynamic link
+            el alcance dinamico lo va a buscar a quien lo invoco, el ultimo
+            va a apuntar a quien lo invoco
+        static link
+            solamente lo voy a tener presente en los lenguajes que tengan alcance estatico
+            porque los q tienen alcance estatico (OZ) va a buscar los valores de las variables al lugar donde se hayan definido
+            va a buscar donde estan contenidas en la memoria
+        dir retorno
+            puntero a la linea que sigue de ejecutarse
+        parametros
+        valor retorno
+
+
+sp al tope de la pila siempre
+frame pointer es el base pointer de organizacoin del procesador
+
+valor temporales como no los usamos no los apilamos
+valor de retorno solo si es funcion
+static link solo si tiene alcance estatico
+
+
+
+a=a+b
+b=a-b
+a=a-b
+
+
+
+

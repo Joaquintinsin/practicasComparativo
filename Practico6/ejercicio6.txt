@@ -1,0 +1,20 @@
+6) Determinar tipo de pasaje de parametros de los lenguajes:
+
+a) Pascal
+    var nombreVar   : referencia
+    nombreVar       : valor
+b) C
+    Por valor y con punteros se pasan por referencia
+c) C++
+    Por valor y con punteros se pasan por referencia
+d) Java
+    Por referenciacion de objetos
+    Pasa por valor la referencia del objeto
+c) Haskell
+    Por valor
+
+
+Ejercicio 9 de la practica
+Traer hecho y bien
+
+

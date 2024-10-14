@@ -7,7 +7,11 @@ local X in
 	 Y = T2
       end
       local COND in
+	 /*
 	 COND = (X > Y)
+	 
+	 equivalente, o uno o el otro */
+	 {Value.'>' X Y COND}
 	 if COND then
 	    {Browse X}
 	 else

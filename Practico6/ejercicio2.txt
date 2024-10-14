@@ -1,0 +1,26 @@
+el primer parametro de exchange si o si celda
+los otros dos pueden ser cualquier cosa, libres o ligadas
+
+2)
+a) X = C := Y
+{Exchange C X Y}
+
+b) C := X
+{Exchange C Temp1 X}
+
+c) X = @C
+{Exchange C X X}
+
+estas dos cosas se tienen que igualar
+el contenido de la celda C tiene que ser X
+a la vez X tiene que seguirme quedando con el contenido de C
+
+ligadura es igualdad, se lee igual para los dos lados
+asignacion va de un lado al otro siempre, no es lo mismo de un lado al otro
+
+no se podria hacer C=Celda2
+salvo que Celda2 sea C
+porque sino estas queriendo ligar la celda C con Celda2
+pero C ya tiene algo, entonces mas vale que sea lo mismo
+
+el guion bajo en los exchange hace que se saltee la asignacion o ligadura

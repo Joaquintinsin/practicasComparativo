@@ -1,0 +1,33 @@
+4)
+Reverse L
+
+fun {Reverse L}
+    case L of nil then nil
+    [] X|XS then {Reverse XS} | X
+    end
+end
+
+
+local Reverse in
+   fun {Reverse L}          % Perfil de la funcion
+      Rs = {NewCell nil}    % Perfil de la funcion, variables locales
+   in
+      for X in L do
+        Rs := X | @Rs
+      end
+      @Rs
+   end
+   {Browse {Reverse [1 2 3]}}
+end
+
+
+local RReverse in
+    fun {RReverse L R}
+        {NewCell R Rs}
+    in
+        case L of nil then @Rs
+        [] L|Ls then {RReverse Ls L|@Rs}
+        end
+    end
+   {Browse {Reverse [1 2 3]}}
+end

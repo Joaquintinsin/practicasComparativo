@@ -1,0 +1,75 @@
+3)
+local X in                              | S1
+    local C in                              | S2
+        local Y in                              | S3   
+            Y = 1                                   | S4
+            local Cero in                           | S5
+                Cero = 0                                | S6
+                {NewCell Cero C}                        | S7
+                {Exchange C X Y}                        | S8
+                local ValorC in                         | S9
+                    {Exchange C ValorC ValorC}              | S10
+                    {Browse ValorC}                         | S11
+                    {Browse X}                              | S12
+                end                                     |
+            end                                     |
+        end                                     |
+    end                                     |
+end                                     |
+
+La linea 11 de @C puede ser que no sea kernel
+Hay que pasarlo a Exchange
+entonces
+    ValorC = @C
+pasa a
+    {Exchange C ValorC ValorC}
+
+Maquina abstracta
+    ([(S,A)], I)
+Ejecucion del programa: 
+apila s1
+    ([(s1, A)], I)
+Ejecuta s1: 
+local X
+    ([(s2, {X->x})], {x})
+Ejecuta s2: 
+local C
+    ([(s3, {X->x, C->c})], {x,c})
+Ejecuta s3: 
+local Y
+    ([(s4, s5, {X->x, C->c, Y->y})], {x,c,y})
+Distribuye
+    ([(s4, {X->x, C->c, Y->y}), (s5, {X->x, C->c, Y->y})], {x,c,y})
+Ejecuta s4: 
+Y=1
+    ([(s5, {X->x, C->c, Y->y})], {x,c,y=1})
+Ejecuta s5: 
+local Cero
+    ([(s6, s7, s8, s9, {X->x, C->c, Y->y, Cero->cero})], {x,c,y=1,cero})
+Distribuye
+    ([(s6, {X->x, C->c, Y->y, Cero->cero}), (s7, {X->x, C->c, Y->y, Cero->cero}), (s8, {X->x, C->c, Y->y, Cero->cero}), (s9, {X->x, C->c, Y->y, Cero->cero})], {x,c,y=1,cero})
+Ejecuta s6: 
+Cero = 0
+    ([(s7, {X->x, C->c, Y->y, Cero->cero}), (s8, {X->x, C->c, Y->y, Cero->cero}), (s9, {X->x, C->c, Y->y, Cero->cero})], {x,c,y=1,cero=0})
+Ejecuta s7: 
+{NewCell Cero C}
+    ([(s8, {X->x, C->c, Y->y, Cero->cero}), (s9, {X->x, C->c, Y->y, Cero->cero})], {x,c="cell_c",y=1,cero=0}, {(c, cero)})
+Ejecuta s8: 
+{Exchange C X Y}
+    ([(s9, {X->x, C->c, Y->y, Cero->cero})], {x=0,c="cell_c",y=1,cero=0}, {(c, y)})
+Ejecuta s9:
+local ValorC
+    ([(s10, s11, s12, {X->x, C->c, Y->y, Cero->cero, ValorC->valorc})], {x=0,c="cell_c",y=1,cero=0,valorc}, {(c, y)})
+Distribuye
+    ([(s10, {X->x, C->c, Y->y, Cero->cero, ValorC->valorc}), (s11, {X->x, C->c, Y->y, Cero->cero, ValorC->valorc}), (s12, {X->x, C->c, Y->y, Cero->cero, ValorC->valorc})], {x=0,c="cell_c",y=1,cero=0,valorc}, {(c, y)})
+Ejecuta s10:
+{Exchange C ValorC ValorC}
+    ([(s11, {X->x, C->c, Y->y, Cero->cero, ValorC->valorc}), (s12, {X->x, C->c, Y->y, Cero->cero, ValorC->valorc})], {x=0,c="cell_c",y=1,cero=0,valorc=1}, {(c, valorc)})
+Ejecuta s11:
+{Browse ValorC}
+    Muestra 1, ([(s12, {X->x, C->c, Y->y, Cero->cero, ValorC->valorc})], {x=0,c="cell_c",y=1,cero=0,valorc=1}, {(c, valorc)})
+Ejecuta s12:
+{Browse X}
+    Muestra 0, ([], {x=0,c="cell_c",y=1,cero=0,valorc=0}, {(c, valorc)})
+
+Termina el programa

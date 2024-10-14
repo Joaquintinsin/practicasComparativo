@@ -1,0 +1,54 @@
+9. Convertir las siguientes funciones recursivas en funciones recursivas a la cola.
+(a) fun {Length Ls}
+        case Ls
+        of nil then 0
+        [] _|Lr then 1+{Length Lr}
+        end
+    end
+
+(b) Definir en Haskell una versión recursiva a la cola de la siguiente función.
+    ejemplo: [a]-->[a]
+        | [] =[]
+        | x:xs = (ejemplo xs) ++ [map x]
+
+donde map es una función de
+a --> a
+
+(c) Definir en Haskell una versión recursiva a la cola de la siguiente función inversa de una lista.
+    inversa: [a]-->[a]
+        | [] =[]
+        | x:xs = concat (inversa xs) [x]
+
+donde concat es la función que concatena 2 listas:
+[a] --> [a] --> [a]
+
+
+a.
+Length [] R = R
+Length (x:xs) R = Length xs R+1
+
+fun {Length Ls R}
+    case LS
+    of nil then R
+    [] _|Lr then {Length Lr R+1}
+    end
+end
+
+b.
+ejemplo :: [a] -> ([a] -> [a] -> [a]) -> (a -> a) -> [a] -> [a]
+ejemplo [] c p partial = partial
+ejemplo (x:xs) c p = ejemplo xs (c (px) partial)
+
+fun {ejemplo l1 LRes}
+    case l1 LRes
+    nil     LRes =  LRes
+    l:ls    LRes =  ejemplo ls ([map l]++LRes)
+    end
+end
+
+
+c.
+inversa :: [a] -> ([a] -> [a] -> [a]) -> (a -> a) -> [a] -> [a]
+inversa [] c p partial = partial
+inversa (x:xs) c p = inversa xs (c [x] partial)
+

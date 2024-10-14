@@ -1,0 +1,94 @@
+5. Implementar en kernel con estado el tipo de datos Stack. Escribir un ejemplo de uso
+
+Stack nil = []
+Stack [x] = [x]
+Stack x:xs = Append x xs
+
+Append elem nil = [elem]
+Append elem [x] = elem:[x]
+Append elem x:xs = elem:Append x xs
+
+local Stack Append in
+    Stack = proc{$L R}
+                case L of nil then R = nil
+                [] [X] then R = [X]
+                [] X|XS then {Append X XS R}
+                end
+    end
+    Append = proc{$E L R}
+                case L of nil then R = [E]
+                [] [X] then R = [X]
+                [] X|XS then {Append X XS E|R}
+                end
+    end
+end
+
+
+
+
+
+
+
+
+
+local Sl in
+    local Push in
+        fun {Push X Xs}
+            {NewCell Xs R}
+        in
+            R = X | @Xs
+            R
+        end
+    end
+
+    local Pop in
+        fun {Pop Xs}
+            {NewCell nil R}
+        in
+            if @Xs == nil then 
+                nil
+            else
+                local I in
+                    {NewCell 1 I}
+                    for E in @Xs do
+                        if @I == 1 then
+                            skip
+                        else
+                            R := E | @R
+                            I := I+1
+                        end
+                    end
+                end
+            end
+            @R
+        end
+    end
+
+            case Xs of nil then nil
+            [] X|Xs then Xs
+            end
+        end
+    end
+
+    local Top in
+        fun {Top Xs}
+            case Xs of nil then nil
+            [] X|Xs then X
+            end
+        end
+    end
+    
+    Sl = {NewCell nil}
+    Push
+
+
+end
+
+
+declare Push Pop Top IsEmpty
+fun {Push X Xs}
+    {NewCell Xs R}
+in
+    R = X | @Xs
+    R
+end

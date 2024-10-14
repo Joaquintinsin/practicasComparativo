@@ -1,22 +1,10 @@
-local Max in
-   local A in
-      local B in
-	 local C in
-	  Max = proc{$X Y Z}
-		   local COND in
-		      COND = (X >= Y)
-		      if COND then
-			 Z = X
-		      else
-			 Z = Y
-		      end
-		   end
-		end
-	    A = 3
-	    B = 2
-	    {Max A B C}
-	    {Browse C}
-	 end
+local List in
+   fun {Length List R}
+      case List
+      of nil then R
+      [] _|Lr then {Length List R+1}
       end
    end
+   List = [1 2 3 4]
+   {Browse {Length List 0}}
 end
