@@ -11,10 +11,6 @@ Var
 Begin { Main }
     New(x);
     New(y);
-
-    x^.next := y;
-    y^.next := x;
-
-    x := nil;
-    y := nil;
+    y := x;
+    Dispose(x);
 End.

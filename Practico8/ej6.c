@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 typedef struct Tnodo {
     int info;
@@ -7,11 +8,9 @@ typedef struct Tnodo {
 
 int main(int argc, char **argv) {
     Tnodo *x = malloc(sizeof(Tnodo));
-    Tnodo *y = malloc(sizeof(Tnodo));
-    x->next = y;
-    y->next = x;
-    x = NULL;
-    y = NULL;
+    Tnodo *y = x;
+    free(x);
+    printf("Valor de y: %d \n", y);
 
     return 0;
 }
