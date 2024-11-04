@@ -47,17 +47,47 @@ end                                                 e
 
 
 ([(S, A)], I, M)
-
+    Ejecutar programa principal
 ([(S1, A)], I, M)
-
+    Ejecutar S1
 ([(S2, {X->x})], {x}, M)
-
+    Ejecutar S2
 ([(S3, S4, S5, {X->x, C->c})], {x,c}, M)
-
-([(S4, S5, {X->x, C->c})], {x=1,c}, M)
-
+    Distribuyo
+([(S3, {X->x, C->c}), (S4, {X->x, C->c}), (S5, {X->x, C->c})], {x,c}, M)
+    Ejecuto S3
+([(S4, {X->x, C->c}), (S5, {X->x, C->c})], {x=1,c}, M)
+    Ejecuto S4
 ([(S5, {X->x, C->c})], {x=1,c='cell_c'}, {(c,x)})
-
-([(S6, S7, )])
-
+    Ejecuto S5
+([(S6, S7, S15, {X->x, C->c, Uno->uno})], {x=1,c='cell_c',uno}, {(c,x)})
+    Distribuyo
+([(S6, {X->x, C->c, Uno->uno}), (S7, {X->x, C->c, Uno->uno}), (S15, {X->x, C->c, Uno->uno})], {x=1,c='cell_c',uno}, {(c,x)})
+    Ejecuto S6
+([(S7, {X->x, C->c, Uno->uno}), (S15, {X->x, C->c, Uno->uno})], {x=1,c='cell_c',uno=1}, {(c,x)})
+    Ejecuto S7
+([(S8, S9, {X->x, C->c, Uno->uno, ValorC->vc}), (S15, {X->x, C->c, Uno->uno})], {x=1,c='cell_c',uno=1,vc}, {(c,x)})
+    Distribuyo
+([(S8, {X->x, C->c, Uno->uno, ValorC->vc}), (S9, {X->x, C->c, Uno->uno, ValorC->vc}), (S15, {X->x, C->c, Uno->uno})], {x=1,c='cell_c',uno=1,vc}, {(c,x)})
+    Ejecuto S8
+([(S9, {X->x, C->c, Uno->uno, ValorC->vc}), (S15, {X->x, C->c, Uno->uno})], {x=1,c='cell_c',uno=1,vc=x=1}, {/-(c,x)-/, (c,vc)})
+    Ejecuto S9
+([(S10, S11, S12, {X->x, C->c, Uno->uno, ValorC->vc, ResSuma->rs}), (S15, {X->x, C->c, Uno->uno})], {x=1,c='cell_c',uno=1,vc=x=1,rs}, {/-(c,x)-/, (c,vc)})
+    Distribuyo
+([(S10, {X->x, C->c, Uno->uno, ValorC->vc, ResSuma->rs}), (S11, {X->x, C->c, Uno->uno, ValorC->vc, ResSuma->rs}), (S12, {X->x, C->c, Uno->uno, ValorC->vc, ResSuma->rs}), (S15, {X->x, C->c, Uno->uno})], {x=1,c='cell_c',uno=1,vc=x=1,rs}, {/-(c,x)-/, (c,vc)})
+    Ejecuto S10
+([(S11, {X->x, C->c, Uno->uno, ValorC->vc, ResSuma->rs}), (S12, {X->x, C->c, Uno->uno, ValorC->vc, ResSuma->rs}), (S15, {X->x, C->c, Uno->uno})], {x=1,c='cell_c',uno=1,vc=x=1,rs=2}, {/-(c,x)-/, (c,vc)})
+    Ejecuto S11
+([(S12, {X->x, C->c, Uno->uno, ValorC->vc, ResSuma->rs}), (S15, {X->x, C->c, Uno->uno})], {x=1,c='cell_c',uno=1,vc=x=1,rs=2}, {/-(c,x)-/, /-(c,vc)-/, (c,rs)})
+    Ejecuto S12
+([(S13, S14, {X->x, C->c, Uno->uno, ValorC->vc, ResSuma->rs, T3->t3}), (S15, {X->x, C->c, Uno->uno})], {x=1,c='cell_c',uno=1,vc=x=1,rs=2,t3}, {/-(c,x)-/, /-(c,vc)-/, (c,rs)})
+    Distribuyo
+([(S13, {X->x, C->c, Uno->uno, ValorC->vc, ResSuma->rs, T3->t3}), (S14, {X->x, C->c, Uno->uno, ValorC->vc, ResSuma->rs, T3->t3}), (S15, {X->x, C->c, Uno->uno})], {x=1,c='cell_c',uno=1,vc=x=1,rs=2,t3}, {/-(c,x)-/, /-(c,vc)-/, (c,rs)})
+    Ejecuto S13
+([(S14, {X->x, C->c, Uno->uno, ValorC->vc, ResSuma->rs, T3->t3}), (S15, {X->x, C->c, Uno->uno})], {x=1,c='cell_c',uno=1,vc=x=1,rs=2,t3=rs=2}, {/-(c,x)-/, /-(c,vc)-/, /-(c,rs)-/, (c,t3)})
+    Ejecuto S14
+{Browse T3} Muestra 2 - ([(S15, {X->x, C->c, Uno->uno})], {x=1,c='cell_c',uno=1,vc=x=1,rs=2,t3=rs=2}, {/-(c,x)-/, /-(c,vc)-/, /-(c,rs)-/, (c,t3)})
+    Ejecuto S15
+{Browse X} Muestra 1 - ([], {x=1,c='cell_c',uno=1,vc=x=1,rs=2,t3=rs=2}, {/-(c,x)-/, /-(c,vc)-/, /-(c,rs)-/, (c,t3)})
+    Termina
 

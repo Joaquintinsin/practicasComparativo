@@ -1,0 +1,8 @@
+a) Crear el archivo seqno.txt conteniendo una unica linea con un cero
+b) Correr dos o mas instancias del programa en forma secuencial (ej4;ej4) y verificar que la salida es la esperada
+c) Correr dos o mas instancias del programa en forma concurrente (ej4&ej4) y verificar el resultado final en el archivo
+d) Existe una race condition? Justificar
+
+d) Hay race condition porque en un primer momento, los dos archivos modifican el archivo y se sobrescribe uno con otro, mostrando 1 1 por ejemplo. Luego, siguiendo la ejecucion, se puede ver que lo que se muestra es distinto a x x... mostrando x y tal que y es distinto de x..
+    Es decir, existen trazas tal que una ejecucion devuelve un resultado y otra traza devuelve otro resultado
+

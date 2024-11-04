@@ -7,7 +7,7 @@ class Test {
         b.type(a);
         b.type(b);
         c.type((A) c);
-        c.type((C) c);
+        c.type((B) c);
     }
 }
 

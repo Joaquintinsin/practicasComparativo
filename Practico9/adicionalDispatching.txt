@@ -1,0 +1,83 @@
+1)
+
+A2:
+    m3(A2 x)
+        x.m1()
+    m3(A3 x)
+        soy A3
+    m()
+        this.m1()
+    m1()
+        pasa por m1 de A2
+
+B hereda A2:
+    m()
+        this.m1()
+    m1()
+        pasa por m1 de B
+
+A2 a = new A2()
+A2 b2 = new B()
+B b3 = new B()
+A3 a3 = new A3()
+
+a.m()
+    pasa por m1 de A2
+
+b3.m()
+    pasa por m1 de B
+
+a.m3(b3)
+    pasa por m1 de B
+
+a.m3(a)
+    pasa por m1 de A2
+
+a.m3(a3)
+    soy A3
+
+
+
+2)
+
+A2:
+    m3(A2 x)
+        x.m1()
+    m3(A3 x)
+        soy A3
+    m()
+        this.m1()
+    m1()
+        pasa por m1 de A2
+
+B hereda A2:
+    m()
+        this.m1()
+    m1()
+        pasa por m1 de B
+    m3(A2 x)
+        x.m1()
+    m3(A3 x)
+        x.m1()
+
+
+A2 a = new A2()
+A2 b2 = new B()
+B b3 = new B()
+A3 a3 = new A3()
+
+a.m()       // 1
+    pasa por m1 de A2
+
+b3.m()      // 2
+    pasa por m1 de B
+
+a.m3(b3)    // 3
+    pasa por m1 de B
+
+a.m3(a)     // 4
+    pasa por m1 de A2
+
+a.m3(a3)    // 5
+    soy A3
+

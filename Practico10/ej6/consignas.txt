@@ -1,0 +1,27 @@
+a) Defina una traza de ejecución por la cual la lista correspondiente a la Celda C termina con un solo elemento.
+
+s1 -> s3 -> s8 -> s9 -> s10 -> s5 -> s6 -> s11 -> s12
+
+b) ¿Cuáles son los posibles valores que muestra {Browse @C}?
+
+[1]
+[2]
+[1,2]
+[2,1]
+
+c) Usando algún mecanismo de sincronización, sincronice la región crítica para que la lista siempre termine con 2 elementos.
+
+L={NewLock}
+thread
+    X=1
+    lock L then
+        C := X|@C
+    end
+    Y1='listo'
+end
+thread
+    lock L then
+        C := 2|@C
+    end
+    Y2='listo'
+end
