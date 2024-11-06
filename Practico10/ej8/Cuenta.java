@@ -31,13 +31,12 @@ public class Cuenta {
 		Semaphore sem = new Semaphore(1);
 
 		Cuenta c1 = new Cuenta(100, "Uno");
-		Cuenta c2 = new Cuenta(500, "Dos");
 
 		// creating two threads with name A and B
 		// Note that thread A will increment the count
 		// and thread B will decrement the count
-		MyThread t1 = new MyThread(sem, "Cuenta1", c1);
-		MyThread t2 = new MyThread(sem, "Cuenta2", c2);
+		MyThread t1 = new MyThread(sem, "Hilo1", c1);
+		MyThread t2 = new MyThread(sem, "Hilo2", c1);
 
 		// stating threads A and B
 		t1.start();
@@ -50,7 +49,6 @@ public class Cuenta {
 		// count will always remain 0 after
 		// both threads will complete their execution
 		System.out.println("Saldo cuenta1: " + c1.getSaldo());
-		System.out.println("Saldo cuenta2: " + c2.getSaldo());
 	}
 }
 
@@ -69,7 +67,7 @@ class MyThread extends Thread {
 	@Override
 	public void run() {
 		// run by thread A
-		if (this.c.getNombre().equals("Uno")) {
+		if (this.getName().equals("Hilo1")) {
 			System.out.println("Starting " + threadName);
 			try {
 				// First, get a permit.

@@ -86,6 +86,34 @@ class MyThread extends Thread {
 	}
 }
 
+class Semaforo extends Semaphore {
+	private int valorSemaforo;
+
+	public Semaforo(int n) {
+		super(n);
+		this.valorSemaforo = n;
+	}
+
+	public int getValorSemaforo() {
+		return this.valorSemaforo;
+	}
+
+	public synchronized void P() {
+		while (this.valorSemaforo == 0)
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				;
+			}
+		this.valorSemaforo--;
+	}
+
+	public synchronized void V() {
+		this.valorSemaforo++;
+		notifyAll();
+	}
+}
+
 // Driver class
 public class SemaphoreDemo {
 	public static void main(String args[]) throws InterruptedException {
